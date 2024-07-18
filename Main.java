@@ -3,43 +3,57 @@ import java.util.Scanner;
 public class Main {
 private static Player p1,p2;
 
+
     public static void main(String[] args) {
         //inicializacion de variables        
         Scanner scanner = new Scanner(System.in);
         p1=ingresarUsuario(scanner);
-        ingresarNumero(p1,scanner);
         p2=ingresarUsuario(scanner);
-        ingresarNumero(p2,scanner);
         String ganador="Felicitaciones-Has ganado!!";
 
         boolean hayGanador=false;
+        boolean seguirJugando=true;
         int turno = 0;
-        //mientras no haya ganador
-        //jugar turnos
-        while(!hayGanador){
-            if(turno==0){
-                //turno p1 si acierta gana
-                if(p1.elegirNumero(p2,scanner)){
-                    hayGanador=true;
-                }else{
-                    //cambia el turno
-                    turno++;
-                }
-            }else{
-                if(p2.elegirNumero(p1,scanner)){
-                    hayGanador=true;
-                }else{
-                    //cambia el turno
-                    turno--;
-                }
-                
-            }
-        }
 
-        if(turno==0){
-            System.out.println(p1.getName()+" "+ganador);
-        }else{
-            System.out.println(p2.getName()+" "+ganador);
+        while(seguirJugando){
+            ingresarNumero(p1,scanner);
+            ingresarNumero(p2,scanner);
+            while(!hayGanador){
+                if(turno==0){
+                    //turno p1 si acierta gana
+                    if(p1.elegirNumero(p2,scanner)){
+                        hayGanador=true;
+                        p1.addPoint();
+                    }else{
+                        //cambia el turno
+                        turno++;
+                    }
+                }else{
+                    if(p2.elegirNumero(p1,scanner)){
+                        p2.addPoint();
+                        hayGanador=true;
+                    }else{
+                        //cambia el turno
+                        turno--;
+                    }   
+                }
+                if(hayGanador){
+                    if(turno==0){
+                        System.out.println(p1.getName()+" "+ganador);
+                        System.out.println();
+                    }else{
+                        System.out.println(p2.getName()+" "+ganador);
+                    }
+                    System.out.println("Puntaje: Jugador "+p1.getName()+"= "+p1.getPoints()+"\n"+
+                                        "Puntaje: Jugador "+p2.getName()+"= "+p2.getPoints());        
+                }
+            }
+            System.out.println("SEGUIR JUGANDO: Y / N");
+                    String seguir = scanner.nextLine();    
+                    if(!seguir.equals("Y")){
+                        seguirJugando=false;
+                    }
+                    hayGanador=false;
         }
         scanner.close();
     }

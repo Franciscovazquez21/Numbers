@@ -36,7 +36,7 @@ public class Number {
 
 
     public String getOcurrencies(String externalNumber){
-        String result= externalNumber+"";
+        String result="";
         int regularOcurrency=0, exactOcurrency=0;
         String [] originalNumber= this.number.split("");
         String [] userNumber= externalNumber.split("");
