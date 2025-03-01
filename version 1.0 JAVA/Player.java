@@ -5,10 +5,12 @@ public class Player{
     private String name;
     private Number number;
     private int points;
+    private int cantMov;
 
     public Player(String name){
         this.name=name;
         this.points=0;
+        this.cantMov=0;
     }
 
     public String getName(){
@@ -23,6 +25,10 @@ public class Player{
         return points;
     }
 
+    public int getMov(){
+        return cantMov;
+    }
+
     public void addPoint(){
         points++;
     }
@@ -34,6 +40,15 @@ public class Player{
     public void setNumber(Number n){
         this.number=n;
     }
+
+    public void setMov(){
+        this.cantMov++;
+    }
+
+    public void resetMov(){
+        this.cantMov=0;
+    }
+
 
 
     public boolean elegirNumero(Player p, Scanner scanner){

@@ -88,6 +88,10 @@ public class Number {
         return false;
     }
 
+    public String getNumber(){
+        return this.number;
+    }
+
 
 
 }

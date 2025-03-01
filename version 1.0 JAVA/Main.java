@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class Main {
 private static Player p1,p2;
 
-
     public static void main(String[] args) {
         //inicializacion de variables        
         Scanner scanner = new Scanner(System.in);
@@ -27,6 +26,7 @@ private static Player p1,p2;
                     }else{
                         //cambia el turno
                         turno++;
+                        p1.setMov();
                     }
                 }else{
                     if(p2.elegirNumero(p1,scanner)){
@@ -35,14 +35,15 @@ private static Player p1,p2;
                     }else{
                         //cambia el turno
                         turno--;
+                        p2.setMov();
                     }   
                 }
                 if(hayGanador){
                     if(turno==0){
-                        System.out.println(p1.getName()+" "+ganador);
+                        System.out.println(p1.getName()+" "+ganador+" Movimientos: "+p1.getMov()+ "NUMERO NO ADIVINADO: "+p1.getNumber().getNumber());
                         System.out.println();
                     }else{
-                        System.out.println(p2.getName()+" "+ganador);
+                        System.out.println(p2.getName()+" "+ganador+" Movimientos: "+p2.getMov()+"NUMERO NO ADIVINADO: "+p2.getNumber().getNumber());
                     }
                     System.out.println("Puntaje: Jugador "+p1.getName()+"= "+p1.getPoints()+"\n"+
                                         "Puntaje: Jugador "+p2.getName()+"= "+p2.getPoints());        
@@ -52,6 +53,8 @@ private static Player p1,p2;
                     String seguir = scanner.nextLine();    
                     if(!seguir.equals("Y")){
                         seguirJugando=false;
+                        p1.resetMov();
+                        p2.resetMov();
                     }
                     hayGanador=false;
         }
